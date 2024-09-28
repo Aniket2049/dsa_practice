@@ -4,6 +4,8 @@ import java.util.Random;
 
 // program to find nth node from last of a linked list
 public class FindNthNodeFromLast {
+	
+	public static int counterForRecursiveSolution = 0;
 
 	// Double Scan solution: 
 	// 1. Find length of list 
@@ -45,6 +47,17 @@ public class FindNthNodeFromLast {
 
 	}
 
+	// Recursive solution
+	public static void Solution3(ListNode head, int n) {
+		if (head != null) {
+			Solution3(head.next, n);
+			counterForRecursiveSolution++;
+			if (n == counterForRecursiveSolution) {
+				System.out.println("Node: " + head.data);
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		Random rand = new Random();
 		int low = 10;
@@ -66,6 +79,9 @@ public class FindNthNodeFromLast {
 		Solution1(list, n);
 
 		// Solution 2
+		Solution2(list, n);
+		
+		// Solution 3
 		Solution2(list, n);
 
 	}
