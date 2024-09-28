@@ -113,7 +113,7 @@ public class LinkedList {
 
 		result = result + head.data;
 		ListNode temp = head.next;
-		while (temp.next != null) {
+		while (temp != null) {
 			result = result + "," + temp.data;
 			temp = temp.next;
 		}
