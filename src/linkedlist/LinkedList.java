@@ -114,6 +114,7 @@ public class LinkedList {
 		ListNode temp = head;
 		while (temp.next != null) {
 			result += temp.data + ", ";
+			temp = temp.next;
 		}
 		return result + "]";
 	}
