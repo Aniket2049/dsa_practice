@@ -111,9 +111,10 @@ public class LinkedList {
 			return result + "]";
 		}
 
-		ListNode temp = head;
+		result = result + head.data;
+		ListNode temp = head.next;
 		while (temp.next != null) {
-			result += temp.data + ", ";
+			result = result + "," + temp.data;
 			temp = temp.next;
 		}
 		return result + "]";
