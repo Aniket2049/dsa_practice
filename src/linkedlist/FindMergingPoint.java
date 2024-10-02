@@ -38,12 +38,13 @@ public class FindMergingPoint {
 		while (temp1 != null && temp2 != null) {
 			if (temp1 == temp2) {
 				System.out.println("Merge at : " + temp1.data);
-				break;
+				return;
 			}
 			temp1 = temp1.next;
 			temp2 = temp2.next;
 		}
 
+		System.out.println("Non Merging lists");
 	}
 
 	public static void main(String[] args) {
