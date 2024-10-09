@@ -3,14 +3,6 @@ package linkedlist;
 // program to merge two sorted lists into one sorted
 public class MergeSortedLists {
 
-	// utility function which prints from a node
-	public static void printList(ListNode head) {
-		while (head != null) {
-			System.out.print(head.data + " ");
-			head = head.next;
-		}
-	}
-
 	// take two head pointers and compare values. push next node into third one
 	// according to sort logic. at end check if either of list still has
 	// elements, if they do append to third list
@@ -76,10 +68,10 @@ public class MergeSortedLists {
 		// ---------- problem setup done ------------
 
 		System.out.println("\n--- Solution 1 ---");
-		printList(Solution1(list1.head, list2.head));
+		Utility.printList(Solution1(list1.head, list2.head));
 		
 		System.out.println("\n--- Solution 1 ---");
-		printList(Solution2(list1.head, list2.head));
+		Utility.printList(Solution2(list1.head, list2.head));
 
 	}
 
