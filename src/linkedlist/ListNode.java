@@ -8,6 +8,11 @@ public class ListNode {
 		this.data = data;
 	}
 
+	public ListNode(int data, ListNode next) {
+		this.data = data;
+		this.next = next;
+	}
+
 	public int getData() {
 		return data;
 	}
