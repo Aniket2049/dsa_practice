@@ -7,7 +7,7 @@ public class ReverseAListInPairs {
 	// Iterative solution
 	public static ListNode Solution1(ListNode head) {
 		ListNode nextToHead = null;
-		ListNode temp2 = null;
+		ListNode temp = null;
 
 		while (head != null && head.next != null) {
 			if (nextToHead != null) {
@@ -17,14 +17,14 @@ public class ReverseAListInPairs {
 			nextToHead = head.next;
 			head.next = head.next.next;
 			nextToHead.next = head;
-			if (temp2 == null) {
-				temp2 = nextToHead;
+			if (temp == null) {
+				temp = nextToHead;
 			}
 
 			head = head.next;
 		}
 
-		return temp2;
+		return temp;
 	}
 
 	// Recursive solution
