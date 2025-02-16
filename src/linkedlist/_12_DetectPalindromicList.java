@@ -71,4 +71,36 @@ public class _12_DetectPalindromicList {
 		return answer;
 	}
 
+	// -------------------------------------------------------------------------
+
+	// Recursive Function to check whether
+	// the list is palindrome
+	static boolean isPalindromeRecur(ListNode end, ListNode[] start) {
+
+		// base case
+		if (end == null)
+			return true;
+
+		// Recursively check the right side.
+		boolean right = isPalindromeRecur(end.next, start);
+
+		// Compare the start and end nodes.
+		boolean ans = right && start[0].data == end.data;
+
+		// Update the start node
+		start[0] = start[0].next;
+
+		return ans;
+	}
+
+	// Function to check whether the list is palindrome
+	static boolean isPalindromeRecursive(ListNode head) {
+
+		// Set starting node to head
+		ListNode[] start = new ListNode[] { head };
+
+		// Recursively check the ll and return
+		return isPalindromeRecur(head, start);
+	}
+
 }
