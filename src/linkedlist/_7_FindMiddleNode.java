@@ -1,6 +1,6 @@
 package linkedlist;
 
-public class FindMiddleNode {
+public class _7_FindMiddleNode {
 
 	public static ListNode Solution1(LinkedList list) {
 		ListNode pointer1, pointer2;

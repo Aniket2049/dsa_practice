@@ -1,7 +1,7 @@
 package linkedlist;
 
 // program to reverse a linked list
-public class ReverseAList {
+public class _5_ReverseAList {
 
 	// take three pointers previous, current, next
 	// start with prev as null and current at head

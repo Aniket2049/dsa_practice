@@ -1,7 +1,7 @@
 package linkedlist;
 
 // program to display a linked list in reverse
-public class PrintReverseList {
+public class _8_PrintListInReverse {
 
 	public static void Solution1(ListNode head) {
 		if (head == null)

@@ -1,12 +1,12 @@
 package linkedlist;
 
 // program to find the merging point of two linked lists
-public class FindMergingPoint {
+public class _6_FindMergingPointOfTwoLists {
 
 	// calculate length difference of lists and iterate on longer list with
 	// till the difference. iterate both of them together and stop at
 	// matching node
-	public static void Solution1(LinkedList list1, LinkedList list2) {
+	public static void Solution(LinkedList list1, LinkedList list2) {
 		int length1 = 0;
 		int length2 = 0;
 		ListNode temp1 = list1.head;
@@ -78,7 +78,7 @@ public class FindMergingPoint {
 
 		// ----- PROBLEM SETUP DONE -----
 
-		Solution1(list1, list2);
+		Solution(list1, list2);
 	}
 
 }

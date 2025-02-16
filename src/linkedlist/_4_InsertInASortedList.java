@@ -1,7 +1,7 @@
 package linkedlist;
 
 // program to insert in a sorted loop
-public class InsertInASortedList {
+public class _4_InsertInASortedList {
 
 	// take two pointers starting from head, one leads other follows
 	// following one jumps to leaders position

@@ -2,7 +2,7 @@ package linkedlist;
 
 // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
 // https://algo.monster/liteproblems/25
-public class ReverseKNodes {
+public class _11_ReverseKNodes {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

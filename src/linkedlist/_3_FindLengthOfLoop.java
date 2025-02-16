@@ -2,16 +2,19 @@ package linkedlist;
 
 import java.util.Random;
 
-// program to detect if there is a loop in linked list
-public class DetectLoop {
+// program to find length of loop if it exists in linked list
+public class _3_FindLengthOfLoop {
 
 	// Use two pointers, slow and fast both starting at head
 	// fast moves two nodes, slow moves one node at a time
 	// if they meet while traversing -> loop exists
+	// if loop found keep one pointer stationary, iterate other
+	// until it finds the stationary one and calculate length
 	public static void Solution1(LinkedList list) {
 		ListNode fastPointer = list.head;
 		ListNode slowPointer = list.head;
 		boolean isLoop = false;
+		int length = 0;
 
 		while (fastPointer != null && fastPointer.next != null) {
 			fastPointer = fastPointer.next.next;
@@ -22,8 +25,14 @@ public class DetectLoop {
 				break;
 			}
 		}
+		if (isLoop) {
+			do {
+				slowPointer = slowPointer.next;
+				length++;
+			} while (slowPointer != fastPointer);
+		}
 
-		System.out.println("Loop : " + (isLoop ? "YES" : "NO"));
+		System.out.println("Length of Loop : " + length);
 
 	}
 

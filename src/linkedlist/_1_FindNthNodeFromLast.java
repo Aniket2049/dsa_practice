@@ -3,7 +3,7 @@ package linkedlist;
 import java.util.Random;
 
 // program to find nth node from last of a linked list
-public class FindNthNodeFromLast {
+public class _1_FindNthNodeFromLast {
 	
 	public static int counterForRecursiveSolution = 0;
 

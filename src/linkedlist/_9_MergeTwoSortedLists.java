@@ -1,7 +1,7 @@
 package linkedlist;
 
 // program to merge two sorted lists into one sorted
-public class MergeSortedLists {
+public class _9_MergeTwoSortedLists {
 
 	// take two head pointers and compare values. push next node into third one
 	// according to sort logic. at end check if either of list still has
@@ -30,7 +30,7 @@ public class MergeSortedLists {
 		return head.next;
 	}
 
-	// Same as solution1 except uses recursion
+	// Recursive Solution
 	public static ListNode Solution2(ListNode head1, ListNode head2) {
 		if (head1 == null)
 			return head2;

@@ -2,7 +2,7 @@ package linkedlist;
 
 // program to reverse a linked list in pairs. 
 // ex: input : 1->2->3->4->X | output: 2->1->4->3->X
-public class ReverseAListInPairs {
+public class _10_ReverseListInPairs {
 
 	// Iterative solution
 	public static ListNode Solution1(ListNode head) {
@@ -26,11 +26,6 @@ public class ReverseAListInPairs {
 
 		return temp;
 	}
-
-	// Recursive solution
-//	public static ListNode Solution2(ListNode head) {
-//
-//	}
 
 	public static void main(String[] args) {
 		LinkedList list = new LinkedList();
