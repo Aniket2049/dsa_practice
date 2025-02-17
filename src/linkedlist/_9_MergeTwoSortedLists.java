@@ -62,16 +62,16 @@ public class _9_MergeTwoSortedLists {
 				list2.insertAtEnd(i);
 		}
 
-		System.out.println("Original Linked List : " + list1.toString());
-		System.out.println("Original Linked List : " + list2.toString());
+		System.out.println("Original Linked List 1 : " + list1.toString());
+		System.out.println("Original Linked List 2 : " + list2.toString());
 
 		// ---------- problem setup done ------------
 
 		System.out.println("\n--- Solution 1 ---");
 		Utility.printList(Solution1(list1.head, list2.head));
 		
-		System.out.println("\n--- Solution 1 ---");
-		Utility.printList(Solution2(list1.head, list2.head));
+		System.out.println("\n--- Solution 2 ---");
+//		Utility.printList(Solution2(list1.head, list2.head));
 
 	}
 
