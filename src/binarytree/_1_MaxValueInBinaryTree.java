@@ -1,14 +1,17 @@
 package binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 // find maximum value in binary tree
 public class _1_MaxValueInBinaryTree {
 
-	public int maxValueInBT(BinaryTreeNode root) {
+	public int maxValueInBTRecursive(BinaryTreeNode root) {
 		int maxVal = Integer.MIN_VALUE;
 
 		if (root != null) {
-			int leftmax = maxValueInBT(root.left);
-			int rightmax = maxValueInBT(root.right);
+			int leftmax = maxValueInBTRecursive(root.left);
+			int rightmax = maxValueInBTRecursive(root.right);
 
 			if (leftmax > rightmax)
 				maxVal = leftmax;
@@ -20,6 +23,29 @@ public class _1_MaxValueInBinaryTree {
 		}
 
 		return maxVal;
+	}
+
+	public int maxValueInBTIterative(BinaryTreeNode root) {
+		if (root == null)
+			return Integer.MIN_VALUE;
+
+		int max = Integer.MIN_VALUE;
+		Queue<BinaryTreeNode> q = new LinkedList<BinaryTreeNode>();
+		q.offer(root);
+		while (!q.isEmpty()) {
+			BinaryTreeNode temp = q.poll();
+			if (temp != null && temp.data > max)
+				max = temp.data;
+
+			if (temp != null) {
+				if (temp.left != null)
+					q.offer(temp.left);
+				if (temp.right != null)
+					q.offer(temp.right);
+			}
+		}
+
+		return max;
 	}
 
 	public static void main(String[] args) {
@@ -40,7 +66,8 @@ public class _1_MaxValueInBinaryTree {
 		root.right.left = new BinaryTreeNode(6);
 		root.right.right = new BinaryTreeNode(7);
 
-		System.out.println(new _1_MaxValueInBinaryTree().maxValueInBT(root));
+		System.out.println(new _1_MaxValueInBinaryTree().maxValueInBTRecursive(root));
+		System.out.println(new _1_MaxValueInBinaryTree().maxValueInBTIterative(root));
 	}
 
 }
