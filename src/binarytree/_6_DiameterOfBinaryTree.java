@@ -4,7 +4,8 @@ package binarytree;
 // The diameter/width of a tree is defined as the number of edges on the 
 // longest path between any two nodes.
 // https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
-// https://leetcode.com/problems/diameter-of-binary-tree/description/ 
+// https://leetcode.com/problems/diameter-of-binary-tree/description/
+// https://algo.monster/liteproblems/543
 public class _6_DiameterOfBinaryTree {
 
 	private int diameterOfBinaryTreeHelper(BinaryTreeNode root, int[] res) {
