@@ -44,7 +44,7 @@ public class _8_112_PathSumRootToLeaf {
 		root.right.left = new TreeNode(6);
 		root.right.right = new TreeNode(7);
 
-		System.out.println(new _8_112_PathSumRootToLeaf().hasPathSum(root, 6));
+		System.out.println(new _8_112_PathSumRootToLeaf().hasPathSum(root, 10));
 	}
 
 	static class TreeNode {
