@@ -2,7 +2,7 @@ package binarytree;
 
 import java.util.HashMap;
 
-// construct a binary tree from given inorder and postorder traversals
+// construct a binary tree from given inorder and preorder traversals
 // https://www.youtube.com/watch?v=aZNaLrVebKQ
 // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
 public class _12_105_BinaryTreeFromInorderPreorder {
