@@ -62,7 +62,7 @@ public class _20_ShortestDistanceBetweenTwoNodesBST {
 		root.right.right.left = new BinaryTreeNode(19);
 		root.right.right.right = new BinaryTreeNode(25);
 
-		int a = 9, b = 25;
+		int a = 9, b = 12;
 		System.out.println(distanceBetweenTwoKeys(root, a, b));
 
 	}
