@@ -9,7 +9,7 @@ public class _2_SelectionSort {
 		int[] arr = new int[10];
 		Random rand = new Random();
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = rand.nextInt(0, 99);
+			arr[i] = rand.nextInt(100);
 		}
 		System.out.println("Before : " + Arrays.toString(arr));
 
