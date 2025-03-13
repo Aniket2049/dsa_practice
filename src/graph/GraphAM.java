@@ -139,7 +139,7 @@ public class GraphAM {
 		System.out.println(graph.toString());
 		System.out.println("\nBFS Visit");
 		graph.bfs();
-		System.out.println("\nDFS Visit");
+		System.out.println("\n\nDFS Visit");
 		graph.bfs();
 	}
 }
