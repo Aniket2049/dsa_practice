@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import graph.GraphAM.GraphNode;
-
 public class GraphAL {
 	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
