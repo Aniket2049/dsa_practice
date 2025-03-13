@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
+import graph.GraphAM.GraphNode;
+
 public class GraphAL {
 	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
@@ -19,7 +21,6 @@ public class GraphAL {
 	}
 
 	// For printing Graph to the console
-
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		for (int i = 0; i < nodeList.size(); i++) {
@@ -55,6 +56,10 @@ public class GraphAL {
 
 	void bfs() {
 		for (GraphNode node : nodeList) {
+			node.isVisited = false;
+		}
+
+		for (GraphNode node : nodeList) {
 			if (!node.isVisited) {
 				bfsVisit(node);
 			}
@@ -78,6 +83,10 @@ public class GraphAL {
 	}
 
 	void dfs() {
+		for (GraphNode node : nodeList) {
+			node.isVisited = false;
+		}
+
 		for (GraphNode node : nodeList) {
 			if (!node.isVisited) {
 				dfsVisit(node);
@@ -115,5 +124,9 @@ public class GraphAL {
 		graph.addUndirectedEdge(3, 4);
 
 		System.out.println(graph.toString());
+		System.out.println("\nBFS Visit");
+		graph.bfs();
+		System.out.println("\n\nDFS Visit");
+		graph.bfs();
 	}
 }
