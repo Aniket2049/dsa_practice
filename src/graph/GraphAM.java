@@ -108,6 +108,35 @@ public class GraphAM {
 		}
 	}
 
+	//  Topological Sort
+	public void addDirectedEdge(int i, int j) {
+		adjacencyMatrix[i][j] = 1;
+	}
+
+	void topologicalVisit(GraphNode node, Stack<GraphNode> stack) {
+		ArrayList<GraphNode> neighbors = getNeighbors(node);
+		for (GraphNode neighbor : neighbors) {
+			if (!neighbor.isVisited) {
+				topologicalVisit(neighbor, stack);
+			}
+		}
+		node.isVisited = true;
+		stack.push(node);
+	}
+
+	void topologicalSort() {
+		Stack<GraphNode> stack = new Stack<>();
+		for (GraphNode node : nodeList) {
+			if (!node.isVisited) {
+				topologicalVisit(node, stack);
+			}
+		}
+
+		while (!stack.isEmpty()) {
+			System.out.print(stack.pop().name + " ");
+		}
+	}
+
 	static class GraphNode {
 		public String name;
 		public int index;
@@ -137,9 +166,42 @@ public class GraphAM {
 
 		System.out.println("Adjacency Matrix");
 		System.out.println(graph.toString());
+		
+		// ----- bfs -----
 		System.out.println("\nBFS Visit");
 		graph.bfs();
+		
+		// ----- dfs -----
 		System.out.println("\n\nDFS Visit");
 		graph.dfs();
+		System.out.println();
+		
+		// ----- new graph for topological sort -----
+		ArrayList<GraphNode> nodeList2 = new ArrayList<GraphAM.GraphNode>();
+		nodeList2.add(new GraphNode("A", 0));
+		nodeList2.add(new GraphNode("B", 1));
+		nodeList2.add(new GraphNode("C", 2));
+		nodeList2.add(new GraphNode("D", 3));
+		nodeList2.add(new GraphNode("E", 4));
+		nodeList2.add(new GraphNode("F", 5));
+		nodeList2.add(new GraphNode("G", 6));
+		nodeList2.add(new GraphNode("H", 7));
+
+		GraphAM graph2 = new GraphAM(nodeList2);
+		graph2.addDirectedEdge(0, 2);
+		graph2.addDirectedEdge(2, 4);
+		graph2.addDirectedEdge(4, 7);
+		graph2.addDirectedEdge(4, 5);
+		graph2.addDirectedEdge(5, 6);
+		graph2.addDirectedEdge(1, 2);
+		graph2.addDirectedEdge(1, 3);
+		graph2.addDirectedEdge(3, 5);
+		
+		System.out.println("\nAdjacency Matrix");
+		System.out.println(graph2.toString());
+		
+		// ----- topological sort -----
+		System.out.println("Topological Sort");
+		graph2.topologicalSort();
 	}
 }

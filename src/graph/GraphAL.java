@@ -150,6 +150,7 @@ public class GraphAL {
 		graph.addUndirectedEdge(2, 3);
 		graph.addUndirectedEdge(3, 4);
 
+		System.out.println("Adjacency List");
 		System.out.println(graph.toString());
 		
 		// ----- bfs -----
