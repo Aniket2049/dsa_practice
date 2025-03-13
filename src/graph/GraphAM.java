@@ -48,7 +48,7 @@ public class GraphAM {
 
 	}
 
-	// BSF internall
+	// BSF internal
 	void bfsVisit(GraphNode node) {
 		LinkedList<GraphNode> queue = new LinkedList<GraphNode>();
 		queue.add(node);
@@ -67,6 +67,10 @@ public class GraphAM {
 	}
 
 	public void bfs() {
+		for (GraphNode node : nodeList) {
+			node.isVisited = false;
+		}
+
 		for (GraphNode node : nodeList) {
 			if (!node.isVisited) {
 				bfsVisit(node);
@@ -94,6 +98,10 @@ public class GraphAM {
 
 	void dfs() {
 		for (GraphNode node : nodeList) {
+			node.isVisited = false;
+		}
+
+		for (GraphNode node : nodeList) {
 			if (!node.isVisited) {
 				dfsVisit(node);
 			}
@@ -110,7 +118,7 @@ public class GraphAM {
 			this.index = index;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		ArrayList<GraphNode> nodeList = new ArrayList<GraphAM.GraphNode>();
 		nodeList.add(new GraphNode("A", 0));
@@ -127,6 +135,11 @@ public class GraphAM {
 		graph.addUndirectedEdge(2, 3);
 		graph.addUndirectedEdge(3, 4);
 
+		System.out.println("Adjacency Matrix");
 		System.out.println(graph.toString());
+		System.out.println("\nBFS Visit");
+		graph.bfs();
+		System.out.println("\nDFS Visit");
+		graph.bfs();
 	}
 }
