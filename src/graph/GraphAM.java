@@ -140,6 +140,6 @@ public class GraphAM {
 		System.out.println("\nBFS Visit");
 		graph.bfs();
 		System.out.println("\n\nDFS Visit");
-		graph.bfs();
+		graph.dfs();
 	}
 }
