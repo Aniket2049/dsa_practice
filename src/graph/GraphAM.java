@@ -137,10 +137,40 @@ public class GraphAM {
 		}
 	}
 
+	// SSSP
+	public static void pathPrint(GraphNode node) {
+		if (node.parent != null) {
+			pathPrint(node.parent);
+		}
+		System.out.print(node.name + " ");
+	}
+
+	public void BFSForSSSPP(GraphNode node) {
+		LinkedList<GraphNode> queue = new LinkedList<>();
+		queue.add(node);
+		while (!queue.isEmpty()) {
+			GraphNode currentNode = queue.remove(0);
+			currentNode.isVisited = true;
+			System.out.print("Printing path for node " + currentNode.name + ": ");
+			pathPrint(currentNode);
+			System.out.println();
+			ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
+			for (GraphNode neighbor : neighbors) {
+				if (!neighbor.isVisited) {
+					queue.add(neighbor);
+					neighbor.isVisited = true;
+					neighbor.parent = currentNode;
+				}
+			}
+
+		}
+	}
+
 	static class GraphNode {
 		public String name;
 		public int index;
 		public boolean isVisited = false;
+		public GraphNode parent;
 
 		public GraphNode(String name, int index) {
 			this.name = name;
@@ -166,16 +196,16 @@ public class GraphAM {
 
 		System.out.println("Adjacency Matrix");
 		System.out.println(graph.toString());
-		
+
 		// ----- bfs -----
 		System.out.println("\nBFS Visit");
 		graph.bfs();
-		
+
 		// ----- dfs -----
 		System.out.println("\n\nDFS Visit");
 		graph.dfs();
 		System.out.println();
-		
+
 		// ----- new graph for topological sort -----
 		ArrayList<GraphNode> nodeList2 = new ArrayList<GraphAM.GraphNode>();
 		nodeList2.add(new GraphNode("A", 0));
@@ -196,12 +226,37 @@ public class GraphAM {
 		graph2.addDirectedEdge(1, 2);
 		graph2.addDirectedEdge(1, 3);
 		graph2.addDirectedEdge(3, 5);
-		
+
 		System.out.println("\nAdjacency Matrix");
 		System.out.println(graph2.toString());
-		
+
 		// ----- topological sort -----
 		System.out.println("Topological Sort");
 		graph2.topologicalSort();
+
+		// ----- single source shortest path -----
+		ArrayList<GraphNode> nodeList3 = new ArrayList<GraphAM.GraphNode>();
+		nodeList3.add(new GraphNode("A", 0));
+		nodeList3.add(new GraphNode("B", 1));
+		nodeList3.add(new GraphNode("C", 2));
+		nodeList3.add(new GraphNode("D", 3));
+		nodeList3.add(new GraphNode("E", 4));
+		nodeList3.add(new GraphNode("F", 5));
+		nodeList3.add(new GraphNode("G", 6));
+
+		GraphAM graph3 = new GraphAM(nodeList3);
+		graph3.addUndirectedEdge(0, 1);
+		graph3.addUndirectedEdge(0, 2);
+		graph3.addUndirectedEdge(1, 3);
+		graph3.addUndirectedEdge(1, 6);
+		graph3.addUndirectedEdge(2, 3);
+		graph3.addUndirectedEdge(2, 4);
+		graph3.addUndirectedEdge(3, 5);
+		graph3.addUndirectedEdge(4, 5);
+		graph3.addUndirectedEdge(5, 6);
+
+		System.out.println(graph3.toString());
+		System.out.println("\nSingle Source Shortest Path from A(0)");
+		graph3.BFSForSSSPP(nodeList3.get(0));
 	}
 }

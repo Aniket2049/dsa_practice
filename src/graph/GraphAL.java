@@ -121,8 +121,7 @@ public class GraphAL {
 		}
 	}
 
-	// SSSSP
-
+	// SSSP
 	public static void pathPrint(GraphNode node) {
 		if (node.parent != null) {
 			pathPrint(node.parent);
@@ -220,7 +219,6 @@ public class GraphAL {
 		graph2.topologicalSort();
 
 		// ----- single source shortest path -----
-
 		ArrayList<GraphNode> nodeList3 = new ArrayList<GraphAL.GraphNode>();
 		nodeList3.add(new GraphNode("A", 0));
 		nodeList3.add(new GraphNode("B", 1));
@@ -242,7 +240,7 @@ public class GraphAL {
 		graph3.addUndirectedEdge(5, 6);
 
 		System.out.println(graph3.toString());
-		System.out.println("\nSingle Source shortest path from A(0)");
+		System.out.println("\nSingle Source Shortest Path from A(0)");
 		graph3.BFSForSSSPP(nodeList3.get(0));
 
 	}
