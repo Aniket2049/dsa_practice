@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 public class WeightedGraph_FloydWarshall {
 
-	ArrayList<WeightedNode> nodeList = new ArrayList<WeightedNode>();
+	ArrayList<WeightedNode_FW> nodeList = new ArrayList<WeightedNode_FW>();
 
-	public WeightedGraph_FloydWarshall(ArrayList<WeightedNode> nodeList) {
+	public WeightedGraph_FloydWarshall(ArrayList<WeightedNode_FW> nodeList) {
 		this.nodeList = nodeList;
 	}
 
-	public static void pathPrint(WeightedNode node) {
+	public static void pathPrint(WeightedNode_FW node) {
 		if (node.parent != null) {
 			pathPrint(node.parent);
 		}
@@ -19,8 +19,8 @@ public class WeightedGraph_FloydWarshall {
 	}
 
 	public void addWeightedEdge(int i, int j, int d) {
-		WeightedNode first = nodeList.get(i);
-		WeightedNode second = nodeList.get(j);
+		WeightedNode_FW first = nodeList.get(i);
+		WeightedNode_FW second = nodeList.get(j);
 		first.neighbors.add(second);
 		first.weightMap.put(second, d);
 	}
@@ -33,9 +33,9 @@ public class WeightedGraph_FloydWarshall {
 
 		// Initializing Distance table from adjacency list
 		for (int i = 0; i < size; i++) {
-			WeightedNode first = nodeList.get(i);
+			WeightedNode_FW first = nodeList.get(i);
 			for (int j = 0; j < size; j++) {
-				WeightedNode second = nodeList.get(j);
+				WeightedNode_FW second = nodeList.get(j);
 				if (i == j)
 					V[i][j] = 0;
 				else if (first.weightMap.containsKey(second)) { //we have direct edge between i & j
@@ -69,11 +69,11 @@ public class WeightedGraph_FloydWarshall {
 	}
 
 	public static void main(String[] args) {
-		ArrayList<WeightedNode> nodeList = new ArrayList<WeightedGraph_FloydWarshall.WeightedNode>();
-		nodeList.add(new WeightedNode("A", 0));
-		nodeList.add(new WeightedNode("B", 1));
-		nodeList.add(new WeightedNode("C", 2));
-		nodeList.add(new WeightedNode("D", 3));
+		ArrayList<WeightedNode_FW> nodeList = new ArrayList<WeightedNode_FW>();
+		nodeList.add(new WeightedNode_FW("A", 0));
+		nodeList.add(new WeightedNode_FW("B", 1));
+		nodeList.add(new WeightedNode_FW("C", 2));
+		nodeList.add(new WeightedNode_FW("D", 3));
 
 		WeightedGraph_FloydWarshall graph = new WeightedGraph_FloydWarshall(nodeList);
 		graph.addWeightedEdge(0, 3, 1);
@@ -88,30 +88,31 @@ public class WeightedGraph_FloydWarshall {
 
 	}
 
-	static class WeightedNode implements Comparable<WeightedNode> {
-		public String name;
-		public ArrayList<WeightedNode> neighbors = new ArrayList<WeightedNode>();
-		public HashMap<WeightedNode, Integer> weightMap = new HashMap<>();
-		public boolean isVisited = false;
-		public WeightedNode parent;
-		public int distance;
-		public int index;
+}
 
-		public WeightedNode(String name, int index) {
-			this.name = name;
-			distance = Integer.MAX_VALUE;
-			this.index = index;
-		}
+class WeightedNode_FW implements Comparable<WeightedNode_FW> {
+	public String name;
+	public ArrayList<WeightedNode_FW> neighbors = new ArrayList<WeightedNode_FW>();
+	public HashMap<WeightedNode_FW, Integer> weightMap = new HashMap<>();
+	public boolean isVisited = false;
+	public WeightedNode_FW parent;
+	public int distance;
+	public int index;
 
-		@Override
-		public String toString() {
-			return name;
-		}
-
-		@Override
-		public int compareTo(WeightedNode o) {
-			return this.distance - o.distance;
-		}
-
+	public WeightedNode_FW(String name, int index) {
+		this.name = name;
+		distance = Integer.MAX_VALUE;
+		this.index = index;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(WeightedNode_FW o) {
+		return this.distance - o.distance;
+	}
+
 }

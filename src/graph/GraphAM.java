@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class GraphAM {
-	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+	ArrayList<GraphNode_AM> nodeList = new ArrayList<GraphNode_AM>();
 	int[][] adjacencyMatrix;
 
-	public GraphAM(ArrayList<GraphNode> nodeList) {
+	public GraphAM(ArrayList<GraphNode_AM> nodeList) {
 		this.nodeList = nodeList;
 		adjacencyMatrix = new int[nodeList.size()][nodeList.size()];
 	}
@@ -36,8 +36,8 @@ public class GraphAM {
 	}
 
 	// get Neighbors
-	public ArrayList<GraphNode> getNeighbors(GraphNode node) {
-		ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
+	public ArrayList<GraphNode_AM> getNeighbors(GraphNode_AM node) {
+		ArrayList<GraphNode_AM> neighbors = new ArrayList<GraphNode_AM>();
 		int nodeIndex = node.index;
 		for (int i = 0; i < adjacencyMatrix.length; i++) {
 			if (adjacencyMatrix[nodeIndex][i] == 1) {
@@ -49,15 +49,15 @@ public class GraphAM {
 	}
 
 	// BSF internal
-	void bfsVisit(GraphNode node) {
-		LinkedList<GraphNode> queue = new LinkedList<GraphNode>();
+	void bfsVisit(GraphNode_AM node) {
+		LinkedList<GraphNode_AM> queue = new LinkedList<GraphNode_AM>();
 		queue.add(node);
 		while (!queue.isEmpty()) {
-			GraphNode currentNode = queue.remove(0);
+			GraphNode_AM currentNode = queue.remove(0);
 			currentNode.isVisited = true;
 			System.out.print(currentNode.name + " ");
-			ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
-			for (GraphNode neighbor : neighbors) {
+			ArrayList<GraphNode_AM> neighbors = getNeighbors(currentNode);
+			for (GraphNode_AM neighbor : neighbors) {
 				if (!neighbor.isVisited) {
 					queue.add(neighbor);
 					neighbor.isVisited = true;
@@ -67,26 +67,26 @@ public class GraphAM {
 	}
 
 	public void bfs() {
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AM node : nodeList) {
 			node.isVisited = false;
 		}
 
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AM node : nodeList) {
 			if (!node.isVisited) {
 				bfsVisit(node);
 			}
 		}
 	}
 
-	void dfsVisit(GraphNode node) {
-		Stack<GraphNode> stack = new Stack<>();
+	void dfsVisit(GraphNode_AM node) {
+		Stack<GraphNode_AM> stack = new Stack<>();
 		stack.push(node);
 		while (!stack.isEmpty()) {
-			GraphNode currentNode = stack.pop();
+			GraphNode_AM currentNode = stack.pop();
 			currentNode.isVisited = true;
 			System.out.print(currentNode.name + " ");
-			ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
-			for (GraphNode neighbor : neighbors) {
+			ArrayList<GraphNode_AM> neighbors = getNeighbors(currentNode);
+			for (GraphNode_AM neighbor : neighbors) {
 				if (!neighbor.isVisited) {
 					stack.push(neighbor);
 					neighbor.isVisited = true;
@@ -97,11 +97,11 @@ public class GraphAM {
 	}
 
 	void dfs() {
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AM node : nodeList) {
 			node.isVisited = false;
 		}
 
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AM node : nodeList) {
 			if (!node.isVisited) {
 				dfsVisit(node);
 			}
@@ -113,9 +113,9 @@ public class GraphAM {
 		adjacencyMatrix[i][j] = 1;
 	}
 
-	void topologicalVisit(GraphNode node, Stack<GraphNode> stack) {
-		ArrayList<GraphNode> neighbors = getNeighbors(node);
-		for (GraphNode neighbor : neighbors) {
+	void topologicalVisit(GraphNode_AM node, Stack<GraphNode_AM> stack) {
+		ArrayList<GraphNode_AM> neighbors = getNeighbors(node);
+		for (GraphNode_AM neighbor : neighbors) {
 			if (!neighbor.isVisited) {
 				topologicalVisit(neighbor, stack);
 			}
@@ -125,8 +125,8 @@ public class GraphAM {
 	}
 
 	void topologicalSort() {
-		Stack<GraphNode> stack = new Stack<>();
-		for (GraphNode node : nodeList) {
+		Stack<GraphNode_AM> stack = new Stack<>();
+		for (GraphNode_AM node : nodeList) {
 			if (!node.isVisited) {
 				topologicalVisit(node, stack);
 			}
@@ -138,24 +138,24 @@ public class GraphAM {
 	}
 
 	// SSSP
-	public static void pathPrint(GraphNode node) {
+	public static void pathPrint(GraphNode_AM node) {
 		if (node.parent != null) {
 			pathPrint(node.parent);
 		}
 		System.out.print(node.name + " ");
 	}
 
-	public void BFSForSSSPP(GraphNode node) {
-		LinkedList<GraphNode> queue = new LinkedList<>();
+	public void BFSForSSSPP(GraphNode_AM node) {
+		LinkedList<GraphNode_AM> queue = new LinkedList<>();
 		queue.add(node);
 		while (!queue.isEmpty()) {
-			GraphNode currentNode = queue.remove(0);
+			GraphNode_AM currentNode = queue.remove(0);
 			currentNode.isVisited = true;
 			System.out.print("Printing path for node " + currentNode.name + ": ");
 			pathPrint(currentNode);
 			System.out.println();
-			ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
-			for (GraphNode neighbor : neighbors) {
+			ArrayList<GraphNode_AM> neighbors = getNeighbors(currentNode);
+			for (GraphNode_AM neighbor : neighbors) {
 				if (!neighbor.isVisited) {
 					queue.add(neighbor);
 					neighbor.isVisited = true;
@@ -166,25 +166,13 @@ public class GraphAM {
 		}
 	}
 
-	static class GraphNode {
-		public String name;
-		public int index;
-		public boolean isVisited = false;
-		public GraphNode parent;
-
-		public GraphNode(String name, int index) {
-			this.name = name;
-			this.index = index;
-		}
-	}
-
 	public static void main(String[] args) {
-		ArrayList<GraphNode> nodeList = new ArrayList<GraphAM.GraphNode>();
-		nodeList.add(new GraphNode("A", 0));
-		nodeList.add(new GraphNode("B", 1));
-		nodeList.add(new GraphNode("C", 2));
-		nodeList.add(new GraphNode("D", 3));
-		nodeList.add(new GraphNode("E", 4));
+		ArrayList<GraphNode_AM> nodeList = new ArrayList<GraphNode_AM>();
+		nodeList.add(new GraphNode_AM("A", 0));
+		nodeList.add(new GraphNode_AM("B", 1));
+		nodeList.add(new GraphNode_AM("C", 2));
+		nodeList.add(new GraphNode_AM("D", 3));
+		nodeList.add(new GraphNode_AM("E", 4));
 
 		GraphAM graph = new GraphAM(nodeList);
 		graph.addUndirectedEdge(0, 1);
@@ -207,15 +195,15 @@ public class GraphAM {
 		System.out.println();
 
 		// ----- new graph for topological sort -----
-		ArrayList<GraphNode> nodeList2 = new ArrayList<GraphAM.GraphNode>();
-		nodeList2.add(new GraphNode("A", 0));
-		nodeList2.add(new GraphNode("B", 1));
-		nodeList2.add(new GraphNode("C", 2));
-		nodeList2.add(new GraphNode("D", 3));
-		nodeList2.add(new GraphNode("E", 4));
-		nodeList2.add(new GraphNode("F", 5));
-		nodeList2.add(new GraphNode("G", 6));
-		nodeList2.add(new GraphNode("H", 7));
+		ArrayList<GraphNode_AM> nodeList2 = new ArrayList<GraphNode_AM>();
+		nodeList2.add(new GraphNode_AM("A", 0));
+		nodeList2.add(new GraphNode_AM("B", 1));
+		nodeList2.add(new GraphNode_AM("C", 2));
+		nodeList2.add(new GraphNode_AM("D", 3));
+		nodeList2.add(new GraphNode_AM("E", 4));
+		nodeList2.add(new GraphNode_AM("F", 5));
+		nodeList2.add(new GraphNode_AM("G", 6));
+		nodeList2.add(new GraphNode_AM("H", 7));
 
 		GraphAM graph2 = new GraphAM(nodeList2);
 		graph2.addDirectedEdge(0, 2);
@@ -235,14 +223,14 @@ public class GraphAM {
 		graph2.topologicalSort();
 
 		// ----- single source shortest path -----
-		ArrayList<GraphNode> nodeList3 = new ArrayList<GraphAM.GraphNode>();
-		nodeList3.add(new GraphNode("A", 0));
-		nodeList3.add(new GraphNode("B", 1));
-		nodeList3.add(new GraphNode("C", 2));
-		nodeList3.add(new GraphNode("D", 3));
-		nodeList3.add(new GraphNode("E", 4));
-		nodeList3.add(new GraphNode("F", 5));
-		nodeList3.add(new GraphNode("G", 6));
+		ArrayList<GraphNode_AM> nodeList3 = new ArrayList<GraphNode_AM>();
+		nodeList3.add(new GraphNode_AM("A", 0));
+		nodeList3.add(new GraphNode_AM("B", 1));
+		nodeList3.add(new GraphNode_AM("C", 2));
+		nodeList3.add(new GraphNode_AM("D", 3));
+		nodeList3.add(new GraphNode_AM("E", 4));
+		nodeList3.add(new GraphNode_AM("F", 5));
+		nodeList3.add(new GraphNode_AM("G", 6));
 
 		GraphAM graph3 = new GraphAM(nodeList3);
 		graph3.addUndirectedEdge(0, 1);
@@ -258,5 +246,17 @@ public class GraphAM {
 		System.out.println(graph3.toString());
 		System.out.println("\nSingle Source Shortest Path from A(0)");
 		graph3.BFSForSSSPP(nodeList3.get(0));
+	}
+}
+
+class GraphNode_AM {
+	public String name;
+	public int index;
+	public boolean isVisited = false;
+	public GraphNode_AM parent;
+
+	public GraphNode_AM(String name, int index) {
+		this.name = name;
+		this.index = index;
 	}
 }

@@ -6,20 +6,20 @@ import java.util.PriorityQueue;
 
 public class WeightedGraph_Dijkstra {
 
-	ArrayList<WeightedNode> nodeList = new ArrayList<WeightedNode>();
+	ArrayList<WeightedNode_D> nodeList = new ArrayList<WeightedNode_D>();
 
-	public WeightedGraph_Dijkstra(ArrayList<WeightedNode> nodeList) {
+	public WeightedGraph_Dijkstra(ArrayList<WeightedNode_D> nodeList) {
 		this.nodeList = nodeList;
 	}
 
 	// single source shortest path for weighted graph
-	void dijkstra(WeightedNode node) {
-		PriorityQueue<WeightedNode> queue = new PriorityQueue<>();
+	void dijkstra(WeightedNode_D node) {
+		PriorityQueue<WeightedNode_D> queue = new PriorityQueue<>();
 		node.distance = 0;
 		queue.addAll(nodeList);
 		while (!queue.isEmpty()) {
-			WeightedNode currentNode = queue.remove();
-			for (WeightedNode neighbor : currentNode.neighbors) {
+			WeightedNode_D currentNode = queue.remove();
+			for (WeightedNode_D neighbor : currentNode.neighbors) {
 				if (queue.contains(neighbor)) {
 					if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
 						neighbor.distance = (currentNode.distance + currentNode.weightMap.get(neighbor));
@@ -31,14 +31,14 @@ public class WeightedGraph_Dijkstra {
 			}
 		}
 
-		for (WeightedNode nodeToCheck : nodeList) {
+		for (WeightedNode_D nodeToCheck : nodeList) {
 			System.out.print("Node " + nodeToCheck + ", distance: " + nodeToCheck.distance + ", Path: ");
 			pathPrint(nodeToCheck);
 			System.out.println();
 		}
 	}
 
-	public static void pathPrint(WeightedNode node) {
+	public static void pathPrint(WeightedNode_D node) {
 		if (node.parent != null) {
 			pathPrint(node.parent);
 		}
@@ -46,21 +46,21 @@ public class WeightedGraph_Dijkstra {
 	}
 
 	public void addWeightedEdge(int i, int j, int d) {
-		WeightedNode first = nodeList.get(i);
-		WeightedNode second = nodeList.get(j);
+		WeightedNode_D first = nodeList.get(i);
+		WeightedNode_D second = nodeList.get(j);
 		first.neighbors.add(second);
 		first.weightMap.put(second, d);
 	}
 
 	public static void main(String[] args) {
-		ArrayList<WeightedNode> nodeList = new ArrayList<WeightedGraph_Dijkstra.WeightedNode>();
-		nodeList.add(new WeightedNode("A", 0));
-		nodeList.add(new WeightedNode("B", 1));
-		nodeList.add(new WeightedNode("C", 2));
-		nodeList.add(new WeightedNode("D", 3));
-		nodeList.add(new WeightedNode("E", 4));
-		nodeList.add(new WeightedNode("F", 5));
-		nodeList.add(new WeightedNode("G", 6));
+		ArrayList<WeightedNode_D> nodeList = new ArrayList<WeightedNode_D>();
+		nodeList.add(new WeightedNode_D("A", 0));
+		nodeList.add(new WeightedNode_D("B", 1));
+		nodeList.add(new WeightedNode_D("C", 2));
+		nodeList.add(new WeightedNode_D("D", 3));
+		nodeList.add(new WeightedNode_D("E", 4));
+		nodeList.add(new WeightedNode_D("F", 5));
+		nodeList.add(new WeightedNode_D("G", 6));
 
 		WeightedGraph_Dijkstra graph = new WeightedGraph_Dijkstra(nodeList);
 		graph.addWeightedEdge(0, 1, 2);
@@ -78,30 +78,31 @@ public class WeightedGraph_Dijkstra {
 
 	}
 
-	static class WeightedNode implements Comparable<WeightedNode> {
-		public String name;
-		public ArrayList<WeightedNode> neighbors = new ArrayList<WeightedNode>();
-		public HashMap<WeightedNode, Integer> weightMap = new HashMap<>();
-		public boolean isVisited = false;
-		public WeightedNode parent;
-		public int distance;
-		public int index;
+}
 
-		public WeightedNode(String name, int index) {
-			this.name = name;
-			distance = Integer.MAX_VALUE;
-			this.index = index;
-		}
+class WeightedNode_D implements Comparable<WeightedNode_D> {
+	public String name;
+	public ArrayList<WeightedNode_D> neighbors = new ArrayList<WeightedNode_D>();
+	public HashMap<WeightedNode_D, Integer> weightMap = new HashMap<>();
+	public boolean isVisited = false;
+	public WeightedNode_D parent;
+	public int distance;
+	public int index;
 
-		@Override
-		public String toString() {
-			return name;
-		}
-
-		@Override
-		public int compareTo(WeightedNode o) {
-			return this.distance - o.distance;
-		}
-
+	public WeightedNode_D(String name, int index) {
+		this.name = name;
+		distance = Integer.MAX_VALUE;
+		this.index = index;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(WeightedNode_D o) {
+		return this.distance - o.distance;
+	}
+
 }

@@ -5,15 +5,15 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class GraphAL {
-	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+	ArrayList<GraphNode_AL> nodeList = new ArrayList<GraphNode_AL>();
 
-	public GraphAL(ArrayList<GraphNode> nodeList) {
+	public GraphAL(ArrayList<GraphNode_AL> nodeList) {
 		this.nodeList = nodeList;
 	}
 
 	public void addUndirectedEdge(int i, int j) {
-		GraphNode first = nodeList.get(i);
-		GraphNode second = nodeList.get(j);
+		GraphNode_AL first = nodeList.get(i);
+		GraphNode_AL second = nodeList.get(j);
 		first.neighbors.add(second);
 		second.neighbors.add(first);
 	}
@@ -36,14 +36,14 @@ public class GraphAL {
 	}
 
 	// BFS internal
-	void bfsVisit(GraphNode node) {
-		LinkedList<GraphNode> queue = new LinkedList<GraphNode>();
+	void bfsVisit(GraphNode_AL node) {
+		LinkedList<GraphNode_AL> queue = new LinkedList<GraphNode_AL>();
 		queue.add(node);
 		while (!queue.isEmpty()) {
-			GraphNode currentNode = queue.remove(0);
+			GraphNode_AL currentNode = queue.remove(0);
 			currentNode.isVisited = true;
 			System.out.print(currentNode.name + " ");
-			for (GraphNode neighbor : currentNode.neighbors) {
+			for (GraphNode_AL neighbor : currentNode.neighbors) {
 				if (!neighbor.isVisited) {
 					queue.add(neighbor);
 					neighbor.isVisited = true;
@@ -53,25 +53,25 @@ public class GraphAL {
 	}
 
 	void bfs() {
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AL node : nodeList) {
 			node.isVisited = false;
 		}
 
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AL node : nodeList) {
 			if (!node.isVisited) {
 				bfsVisit(node);
 			}
 		}
 	}
 
-	void dfsVisit(GraphNode node) {
-		Stack<GraphNode> stack = new Stack<>();
+	void dfsVisit(GraphNode_AL node) {
+		Stack<GraphNode_AL> stack = new Stack<>();
 		stack.push(node);
 		while (!stack.isEmpty()) {
-			GraphNode currentNode = stack.pop();
+			GraphNode_AL currentNode = stack.pop();
 			currentNode.isVisited = true;
 			System.out.print(currentNode.name + " ");
-			for (GraphNode neighbor : currentNode.neighbors) {
+			for (GraphNode_AL neighbor : currentNode.neighbors) {
 				if (!neighbor.isVisited) {
 					stack.push(neighbor);
 					neighbor.isVisited = true;
@@ -81,11 +81,11 @@ public class GraphAL {
 	}
 
 	void dfs() {
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AL node : nodeList) {
 			node.isVisited = false;
 		}
 
-		for (GraphNode node : nodeList) {
+		for (GraphNode_AL node : nodeList) {
 			if (!node.isVisited) {
 				dfsVisit(node);
 			}
@@ -94,13 +94,13 @@ public class GraphAL {
 
 	// Topological Sort
 	public void addDirectedEdge(int i, int j) {
-		GraphNode first = nodeList.get(i);
-		GraphNode second = nodeList.get(j);
+		GraphNode_AL first = nodeList.get(i);
+		GraphNode_AL second = nodeList.get(j);
 		first.neighbors.add(second);
 	}
 
-	void topologicalVisit(GraphNode node, Stack<GraphNode> stack) {
-		for (GraphNode neighbor : node.neighbors) {
+	void topologicalVisit(GraphNode_AL node, Stack<GraphNode_AL> stack) {
+		for (GraphNode_AL neighbor : node.neighbors) {
 			if (!neighbor.isVisited) {
 				topologicalVisit(neighbor, stack);
 			}
@@ -110,8 +110,8 @@ public class GraphAL {
 	}
 
 	void topologicalSort() {
-		Stack<GraphNode> stack = new Stack<>();
-		for (GraphNode node : nodeList) {
+		Stack<GraphNode_AL> stack = new Stack<>();
+		for (GraphNode_AL node : nodeList) {
 			if (!node.isVisited) {
 				topologicalVisit(node, stack);
 			}
@@ -122,23 +122,23 @@ public class GraphAL {
 	}
 
 	// SSSP
-	public static void pathPrint(GraphNode node) {
+	public static void pathPrint(GraphNode_AL node) {
 		if (node.parent != null) {
 			pathPrint(node.parent);
 		}
 		System.out.print(node.name + " ");
 	}
 
-	public void BFSForSSSPP(GraphNode node) {
-		LinkedList<GraphNode> queue = new LinkedList<>();
+	public void BFSForSSSPP(GraphNode_AL node) {
+		LinkedList<GraphNode_AL> queue = new LinkedList<>();
 		queue.add(node);
 		while (!queue.isEmpty()) {
-			GraphNode currentNode = queue.remove(0);
+			GraphNode_AL currentNode = queue.remove(0);
 			currentNode.isVisited = true;
 			System.out.print("Printing path for node " + currentNode.name + ": ");
 			pathPrint(currentNode);
 			System.out.println();
-			for (GraphNode neighbor : currentNode.neighbors) {
+			for (GraphNode_AL neighbor : currentNode.neighbors) {
 				if (!neighbor.isVisited) {
 					queue.add(neighbor);
 					neighbor.isVisited = true;
@@ -149,27 +149,13 @@ public class GraphAL {
 		}
 	}
 
-	static class GraphNode {
-		public String name;
-		public int index;
-		public boolean isVisited = false;
-		public GraphNode parent;
-
-		public ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
-
-		public GraphNode(String name, int index) {
-			this.name = name;
-			this.index = index;
-		}
-	}
-
 	public static void main(String[] args) {
-		ArrayList<GraphNode> nodeList = new ArrayList<GraphAL.GraphNode>();
-		nodeList.add(new GraphNode("A", 0));
-		nodeList.add(new GraphNode("B", 1));
-		nodeList.add(new GraphNode("C", 2));
-		nodeList.add(new GraphNode("D", 3));
-		nodeList.add(new GraphNode("E", 4));
+		ArrayList<GraphNode_AL> nodeList = new ArrayList<GraphNode_AL>();
+		nodeList.add(new GraphNode_AL("A", 0));
+		nodeList.add(new GraphNode_AL("B", 1));
+		nodeList.add(new GraphNode_AL("C", 2));
+		nodeList.add(new GraphNode_AL("D", 3));
+		nodeList.add(new GraphNode_AL("E", 4));
 
 		GraphAL graph = new GraphAL(nodeList);
 		graph.addUndirectedEdge(0, 1);
@@ -192,15 +178,15 @@ public class GraphAL {
 		System.out.println("\n");
 
 		// ----- new graph for topological sort -----
-		ArrayList<GraphNode> nodeList2 = new ArrayList<GraphAL.GraphNode>();
-		nodeList2.add(new GraphNode("A", 0));
-		nodeList2.add(new GraphNode("B", 1));
-		nodeList2.add(new GraphNode("C", 2));
-		nodeList2.add(new GraphNode("D", 3));
-		nodeList2.add(new GraphNode("E", 4));
-		nodeList2.add(new GraphNode("F", 5));
-		nodeList2.add(new GraphNode("G", 6));
-		nodeList2.add(new GraphNode("H", 7));
+		ArrayList<GraphNode_AL> nodeList2 = new ArrayList<GraphNode_AL>();
+		nodeList2.add(new GraphNode_AL("A", 0));
+		nodeList2.add(new GraphNode_AL("B", 1));
+		nodeList2.add(new GraphNode_AL("C", 2));
+		nodeList2.add(new GraphNode_AL("D", 3));
+		nodeList2.add(new GraphNode_AL("E", 4));
+		nodeList2.add(new GraphNode_AL("F", 5));
+		nodeList2.add(new GraphNode_AL("G", 6));
+		nodeList2.add(new GraphNode_AL("H", 7));
 
 		GraphAL graph2 = new GraphAL(nodeList2);
 		graph2.addDirectedEdge(0, 2);
@@ -219,14 +205,14 @@ public class GraphAL {
 		graph2.topologicalSort();
 
 		// ----- single source shortest path -----
-		ArrayList<GraphNode> nodeList3 = new ArrayList<GraphAL.GraphNode>();
-		nodeList3.add(new GraphNode("A", 0));
-		nodeList3.add(new GraphNode("B", 1));
-		nodeList3.add(new GraphNode("C", 2));
-		nodeList3.add(new GraphNode("D", 3));
-		nodeList3.add(new GraphNode("E", 4));
-		nodeList3.add(new GraphNode("F", 5));
-		nodeList3.add(new GraphNode("G", 6));
+		ArrayList<GraphNode_AL> nodeList3 = new ArrayList<GraphNode_AL>();
+		nodeList3.add(new GraphNode_AL("A", 0));
+		nodeList3.add(new GraphNode_AL("B", 1));
+		nodeList3.add(new GraphNode_AL("C", 2));
+		nodeList3.add(new GraphNode_AL("D", 3));
+		nodeList3.add(new GraphNode_AL("E", 4));
+		nodeList3.add(new GraphNode_AL("F", 5));
+		nodeList3.add(new GraphNode_AL("G", 6));
 
 		GraphAL graph3 = new GraphAL(nodeList3);
 		graph3.addUndirectedEdge(0, 1);
@@ -243,5 +229,19 @@ public class GraphAL {
 		System.out.println("\nSingle Source Shortest Path from A(0)");
 		graph3.BFSForSSSPP(nodeList3.get(0));
 
+	}
+}
+
+class GraphNode_AL {
+	public String name;
+	public int index;
+	public boolean isVisited = false;
+	public GraphNode_AL parent;
+
+	public ArrayList<GraphNode_AL> neighbors = new ArrayList<GraphNode_AL>();
+
+	public GraphNode_AL(String name, int index) {
+		this.name = name;
+		this.index = index;
 	}
 }

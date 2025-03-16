@@ -2,17 +2,16 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.PriorityQueue;
 
 public class WeightedGraph_BellmanFord {
 
-	ArrayList<WeightedNode> nodeList = new ArrayList<WeightedNode>();
+	ArrayList<WeightedNode_BF> nodeList = new ArrayList<WeightedNode_BF>();
 
-	public WeightedGraph_BellmanFord(ArrayList<WeightedNode> nodeList) {
+	public WeightedGraph_BellmanFord(ArrayList<WeightedNode_BF> nodeList) {
 		this.nodeList = nodeList;
 	}
 
-	public static void pathPrint(WeightedNode node) {
+	public static void pathPrint(WeightedNode_BF node) {
 		if (node.parent != null) {
 			pathPrint(node.parent);
 		}
@@ -20,19 +19,19 @@ public class WeightedGraph_BellmanFord {
 	}
 
 	public void addWeightedEdge(int i, int j, int d) {
-		WeightedNode first = nodeList.get(i);
-		WeightedNode second = nodeList.get(j);
+		WeightedNode_BF first = nodeList.get(i);
+		WeightedNode_BF second = nodeList.get(j);
 		first.neighbors.add(second);
 		first.weightMap.put(second, d);
 	}
 
 	// single source shortest path for weighted with negative cycle graph
 	// Bellman Ford Algorithm
-	void bellmanFord(WeightedNode sourceNode) {
+	void bellmanFord(WeightedNode_BF sourceNode) {
 		sourceNode.distance = 0;
 		for (int i = 0; i < nodeList.size(); i++) {
-			for (WeightedNode currentNode : nodeList) {
-				for (WeightedNode neighbor : currentNode.neighbors) {
+			for (WeightedNode_BF currentNode : nodeList) {
+				for (WeightedNode_BF neighbor : currentNode.neighbors) {
 					if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
 						neighbor.distance = (currentNode.distance + currentNode.weightMap.get(neighbor));
 						neighbor.parent = currentNode;
@@ -41,8 +40,8 @@ public class WeightedGraph_BellmanFord {
 			}
 		}
 		System.out.println("Checking for Negative Cycle..");
-		for (WeightedNode currentNode : nodeList) {
-			for (WeightedNode neighbor : currentNode.neighbors) {
+		for (WeightedNode_BF currentNode : nodeList) {
+			for (WeightedNode_BF neighbor : currentNode.neighbors) {
 				if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
 					System.out.println("Negative cycle found: \n");
 					System.out.println("Vertex name: " + neighbor.name);
@@ -55,7 +54,7 @@ public class WeightedGraph_BellmanFord {
 		}
 		System.out.println("Negative Cycle not found");
 
-		for (WeightedNode nodeToCheck : nodeList) {
+		for (WeightedNode_BF nodeToCheck : nodeList) {
 			System.out.print("Node " + nodeToCheck + ", distance: " + nodeToCheck.distance + ", Path: ");
 			pathPrint(nodeToCheck);
 			System.out.println();
@@ -64,14 +63,14 @@ public class WeightedGraph_BellmanFord {
 	}
 
 	public static void main(String[] args) {
-		ArrayList<WeightedNode> nodeList = new ArrayList<WeightedGraph_BellmanFord.WeightedNode>();
-		nodeList.add(new WeightedNode("A", 0));
-		nodeList.add(new WeightedNode("B", 1));
-		nodeList.add(new WeightedNode("C", 2));
-		nodeList.add(new WeightedNode("D", 3));
-		nodeList.add(new WeightedNode("E", 4));
-		nodeList.add(new WeightedNode("F", 5));
-		nodeList.add(new WeightedNode("G", 6));
+		ArrayList<WeightedNode_BF> nodeList = new ArrayList<WeightedNode_BF>();
+		nodeList.add(new WeightedNode_BF("A", 0));
+		nodeList.add(new WeightedNode_BF("B", 1));
+		nodeList.add(new WeightedNode_BF("C", 2));
+		nodeList.add(new WeightedNode_BF("D", 3));
+		nodeList.add(new WeightedNode_BF("E", 4));
+		nodeList.add(new WeightedNode_BF("F", 5));
+		nodeList.add(new WeightedNode_BF("G", 6));
 
 		WeightedGraph_BellmanFord graph = new WeightedGraph_BellmanFord(nodeList);
 		graph.addWeightedEdge(0, 1, 2);
@@ -89,30 +88,31 @@ public class WeightedGraph_BellmanFord {
 
 	}
 
-	static class WeightedNode implements Comparable<WeightedNode> {
-		public String name;
-		public ArrayList<WeightedNode> neighbors = new ArrayList<WeightedNode>();
-		public HashMap<WeightedNode, Integer> weightMap = new HashMap<>();
-		public boolean isVisited = false;
-		public WeightedNode parent;
-		public int distance;
-		public int index;
+}
 
-		public WeightedNode(String name, int index) {
-			this.name = name;
-			distance = Integer.MAX_VALUE;
-			this.index = index;
-		}
+class WeightedNode_BF implements Comparable<WeightedNode_BF> {
+	public String name;
+	public ArrayList<WeightedNode_BF> neighbors = new ArrayList<WeightedNode_BF>();
+	public HashMap<WeightedNode_BF, Integer> weightMap = new HashMap<>();
+	public boolean isVisited = false;
+	public WeightedNode_BF parent;
+	public int distance;
+	public int index;
 
-		@Override
-		public String toString() {
-			return name;
-		}
-
-		@Override
-		public int compareTo(WeightedNode o) {
-			return this.distance - o.distance;
-		}
-
+	public WeightedNode_BF(String name, int index) {
+		this.name = name;
+		distance = Integer.MAX_VALUE;
+		this.index = index;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(WeightedNode_BF o) {
+		return this.distance - o.distance;
+	}
+
 }
